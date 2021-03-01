@@ -1,0 +1,225 @@
+@charset "utf-8";
+#root {
+	width: 100%;
+	height: 100%;
+	background-color: white;
+}
+
+#root .top {
+	width: 100%;
+	height: 4.5rem;
+	color: #1E9051;
+	text-align: center;
+	background: url(../img/bg.jpg) no-repeat center;
+	background-size: contain;
+	padding-top: 0.67rem;
+}
+
+#root .top .text1 {
+	font-size: 0.32rem;
+	line-height: 0.45rem;
+	padding-top: 1.5rem;
+}
+
+#root .top .text2 {
+	font-size: 0.4rem;
+	font-weight: bold;
+	line-height: 0.56rem;
+	padding-top: 0.1rem;
+}
+
+#root .module {
+	width: 100%;
+	padding: 0 0.22rem 0.1rem 0.22rem;
+	border-bottom: 0.2rem solid #EDF0EF;
+}
+
+#root .module:last-child {
+	border-bottom: 0;
+}
+
+#root .module.splist {
+	width: 100%;
+	height: calc(100% - 7.9rem) !important;
+}
+
+#splist_con {
+	width: 100%;
+	height: calc(100% - 0.72rem) !important;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+#root .module .line {
+	width: 100%;
+	min-height: 0.72rem;
+}
+
+#root .module .line.title {
+	color: #4A4A4A;
+	font-size: 0.24rem;
+	font-weight: bold;
+	padding-left: 0.3rem;
+	line-height: 0.72rem;
+	position: relative;
+}
+
+#root .module .line.title:before {
+	content: '';
+	display: inline-block;
+	width: 0.1rem;
+	height: 0.32rem;
+	background-color: #2BCD74;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	position: absolute;
+	top: 0.2rem;
+	left: 0;
+}
+
+#root .module .line .text1 {
+	float: left;
+	width: 1.8rem;
+	color: #A0AFA9;
+	font-size: 0.3rem;
+	padding: 0.18rem 0 0.18rem 0.3rem;
+	line-height: 0.36rem;
+}
+
+#root .module .line .text2 {
+	float: left;
+	width: 4.6rem;
+	color: #4A4A4A;
+	font-size: 0.3rem;
+	padding: 0.18rem 0;
+	line-height: 0.36rem;
+}
+
+#root .module .line .text2_1 {
+	width: auto;
+}
+
+#root .module .line .text3 {
+	float: left;
+	color: #4A4A4A;
+	font-size: 0.3rem;
+	padding: 0.18rem 0 0.18rem 0.3rem;
+	line-height: 0.36rem;
+}
+
+#root .module .line .text4 {
+	float: left;
+	color: #A0AFA9;
+	font-size: 0.24rem;
+	padding: 0.20rem 0;
+	line-height: 0.36rem;
+	margin-left: 0.1rem;
+}
+
+#root .module .line .icon {
+	display: block;
+	float: right;
+	width: 0.22rem;
+	height: 0.36rem;
+	margin-top: 0.18rem;
+	background: url(../img/icon_right.png) no-repeat center;
+	background-size: cover;
+}
+
+#root .module .line .yyzz {
+	float: left;
+	width: 1.2rem;
+	height: 1.2rem;
+	padding: 0.04rem 0 0.1rem 0;
+}
+
+#root .module .item {
+	width: 100%;
+	height: 1.08rem;
+	min-height: 1.08rem;
+	padding-left: 1rem;
+	position: relative;
+}
+
+#root .module .item:before {
+	content: '';
+	display: block;
+	width: 0.2rem;
+	height: 0.2rem;
+	background-color: #2BCD74;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	position: absolute;
+	left: 0.34rem;
+	top: 0.18rem;
+}
+
+#root .module .item:after {
+	content: '';
+	display: block;
+	width: 0.04rem;
+	height: 0.9rem;
+	background-color: #2BCD74;
+	position: absolute;
+	left: 0.42rem;
+	top: 0.38rem;
+}
+
+#root .module .item:last-child:after {
+	display: none;
+}
+
+#root .module .item .desc {
+	color: #4A4A4A;
+	font-size: 0.3rem;
+	padding-top: 0.1rem;
+}
+
+#root .module .item .desc .look-img {
+	color: #1E9051;
+	margin-left: 0.1rem;
+}
+
+#root .module .item .time {
+	color: #A0AFA9;
+	font-size: 0.2rem;
+	padding-top: 0.16rem;
+}
+
+#mask {
+	display: none;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 9999;
+}
+
+#mask .con {
+	width: 6rem;
+	height: 9rem;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -3rem;
+	margin-top: -5rem;
+	background: white;
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+}
+
+#mask .con div {
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+}
+
+#mask .con img {
+	display: block;
+	max-width: 100%;
+}

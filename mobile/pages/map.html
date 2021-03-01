@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>门店地图</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../css/map.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_764987_7o7azf8hu5r.css" />
+    <script type="text/javascript" src="../js/rem.js"></script>
+    <script type="text/javascript" src="../js/art-template-4.13.2.min.js"></script>
+    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=8iSCGeDp76W39xpjKwrUQ23VhmXUaWno"></script>
+</head>
+
+<body>
+    <div class="page">
+        <div class="page_top">
+            <div class="input_con">
+                <div class="input">
+                    <i class="iconfont icon-search1"></i>
+                    <input type="text" value="" placeholder="门店名称/地址" />
+                </div>
+            </div>
+            <div class="select_con">
+                <div class="item">
+                    <i class="iconfont icon-right-copy-copy"></i>
+                    <select name="" id="mdlx_select">
+                        <option value="0">门店类型</option>
+                        <option value="1">菜场</option>
+                        <option value="2">平价菜专柜</option>
+                    </select>
+                </div>
+                <div class="item">
+                    <i class="iconfont icon-right-copy-copy"></i>
+                    <select name="" id="fj_select">
+                        <option value="0">附近</option>
+                        <option value="1">1km内</option>
+                        <option value="2">2km内</option>
+                        <option value="3">3km内</option>
+                        <option value="4">4km内</option>
+                        <option value="5">5km内</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div id="map"></div>
+        <div class="line_title">附近门店</div>
+        <div class="shop_list" id="shop_list">
+            <script type="text/html" id="shop_list_tpl">
+                <% for(var i = 0; i < shopList.length; i++) { %>
+                    <div class="item">
+                        <div class="title">
+                            <span class="name"><%= shopList[i].marketName %></span></span>
+                            <span class="xq">门店详情</span>
+                        </div>
+                        <div class="site">
+                            <span><%= shopList[i].marketAddress %></span>
+                        </div>
+                        <div class="jl">
+                            <i class="icon-daohang1 iconfont"></i>
+                            <span>距您1.2km</span>
+                        </div>
+                    </div>
+                <% } %>
+            </script>
+        </div>
+        <footer class="footer" id="footer">
+            <div class="item" data-index='1'>
+                <i class="iconfont icon-shop"></i>
+                <span>门店信息</span>
+            </div>
+            <div class="item active" data-index='2'>
+                <i class="iconfont icon-ditu"></i>
+                <span>门店地图</span>
+            </div>
+            <div class="item" data-index='3'>
+                <i class="iconfont icon-shop"></i>
+                <span>我的</span>
+            </div>
+        </footer>
+        <!-- <div class="page_bottom">
+            <div class="item">
+                <i class="iconfont icon-shop"></i>
+                <span class="name">门店信息</span>
+            </div>
+            <div class="item active">
+                <i class="iconfont icon-ditu"></i>
+                <span class="name">点位地图</span>
+            </div>
+            <div class="item">
+                <i class="iconfont icon-shop"></i>
+                <span class="name">我的</span>
+            </div>
+        </div> -->
+    </div>
+</body>
+
+</html>
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script>
+    let shopList = [
+        {
+            "id": 45,
+            "marketName": "浦商邻里荟福山店",
+            "marketCode": "1023",
+            "linkman": "向文帅",
+            "linkTelephone": "13917399769",
+            "marketAddress": "福山路49号",
+            "axisX": "121.532355",
+            "axisY": "31.243832",
+            "comment": "面积：3314",
+            "planeId": 57,
+            "createDate": "2020-03-04 20:24:52",
+            "status": 1,
+            "fileName": "ccpmt.jpg",
+            "uploadTime": "2020-07-20 18:42:58",
+            "folderPath": "/cms_file/business/plane/1595241778669/",
+            "channelName": null,
+            "channelId": null
+        },
+        {
+            "id": 43,
+            "marketName": "浦商生鲜石潭街店",
+            "marketCode": "1022",
+            "linkman": "向文帅",
+            "linkTelephone": "13917399769",
+            "marketAddress": "石潭街109号",
+            "axisX": "121.879546",
+            "axisY": "30.982482",
+            "comment": "面积：1200",
+            "planeId": 45,
+            "createDate": "2020-03-04 20:23:55",
+            "status": 1,
+            "fileName": "11.jpg",
+            "uploadTime": "2019-06-05 18:20:29",
+            "folderPath": "/cms_file/business/plane/1559730029762/",
+            "channelName": null,
+            "channelId": null
+        },
+        {
+            "id": 41,
+            "marketName": "B10-06地块",
+            "marketCode": "1021",
+            "linkman": "向文帅",
+            "linkTelephone": "13917399769",
+            "marketAddress": "拱秀路城西路交叉口",
+            "axisX": "121.755728",
+            "axisY": "31.074215",
+            "comment": "",
+            "planeId": 43,
+            "createDate": "2020-03-04 20:21:59",
+            "status": 1,
+            "fileName": "11.jpg",
+            "uploadTime": "2019-06-05 18:15:15",
+            "folderPath": "/cms_file/business/plane/1559729715532/",
+            "channelName": null,
+            "channelId": null
+        },
+        {
+            "id": 39,
+            "marketName": "E06-11地块",
+            "marketCode": "1020",
+            "linkman": "向文帅",
+            "linkTelephone": "13917399769",
+            "marketAddress": "拱乐路听潮路交叉口",
+            "axisX": "121.748128",
+            "axisY": "31.067371",
+            "comment": "",
+            "planeId": 41,
+            "createDate": "2020-03-04 20:20:40",
+            "status": 1,
+            "fileName": "20171011162832_BMYtj.jpeg",
+            "uploadTime": "2019-06-05 18:13:07",
+            "folderPath": "/cms_file/business/plane/1559729587252/",
+            "channelName": null,
+            "channelId": null
+        },
+        {
+            "id": 37,
+            "marketName": "祝和苑菜市场",
+            "marketCode": "1019",
+            "linkman": "向文帅",
+            "linkTelephone": "13917399769",
+            "marketAddress": "千汇路1000弄",
+            "axisX": "121.772188",
+            "axisY": "31.125146",
+            "comment": "面积：800",
+            "planeId": 39,
+            "createDate": "2020-03-04 20:17:38",
+            "status": 1,
+            "fileName": "20171011162832_BMYtj.jpeg",
+            "uploadTime": "2019-06-05 18:03:52",
+            "folderPath": "/cms_file/business/plane/1559729032615/",
+            "channelName": null,
+            "channelId": null
+        },
+        {
+            "id": 35,
+            "marketName": "航城菜场",
+            "marketCode": "1018",
+            "linkman": "向文帅",
+            "linkTelephone": "13917399769",
+            "marketAddress": "航城菜场",
+            "axisX": "121.756436",
+            "axisY": "31.152173",
+            "comment": "面积：2901",
+            "planeId": 37,
+            "createDate": "2020-03-04 20:15:33",
+            "status": 1,
+            "fileName": "20171011162832_BMYtj.jpeg",
+            "uploadTime": "2019-06-05 18:02:14",
+            "folderPath": "/cms_file/business/plane/1559728934897/",
+            "channelName": null,
+            "channelId": null
+        },
+        {
+            "id": 33,
+            "marketName": "施湾菜市场",
+            "marketCode": "1017",
+            "linkman": "向文帅",
+            "linkTelephone": "13917399769",
+            "marketAddress": "施宏路461号",
+            "axisX": "121.766449",
+            "axisY": "31.157998",
+            "comment": "面积：1200",
+            "planeId": 35,
+            "createDate": "2020-03-04 20:13:14",
+            "status": 1,
+            "fileName": "04.jpg",
+            "uploadTime": "2019-06-05 17:58:10",
+            "folderPath": "/cms_file/business/plane/1559728690128/",
+            "channelName": null,
+            "channelId": null
+        },
+        {
+            "id": 31,
+            "marketName": "东港菜市场",
+            "marketCode": "1016",
+            "linkman": "向文帅",
+            "linkTelephone": "13917399769",
+            "marketAddress": "祝城路东港卫生所",
+            "axisX": "121.768846",
+            "axisY": "31.115224",
+            "comment": "面积：2800",
+            "planeId": 33,
+            "createDate": "2020-03-04 20:12:11",
+            "status": 1,
+            "fileName": "04.jpg",
+            "uploadTime": "2019-06-05 17:57:37",
+            "folderPath": "/cms_file/business/plane/1559728657845/",
+            "channelName": null,
+            "channelId": null
+        },
+        {
+            "id": 29,
+            "marketName": "绿洲菜场",
+            "marketCode": "1015",
+            "linkman": "向文帅",
+            "linkTelephone": "13917399769",
+            "marketAddress": "振庭路68号",
+            "axisX": "121.597739",
+            "axisY": "31.327632",
+            "comment": "面积：3800",
+            "planeId": 31,
+            "createDate": "2020-03-04 20:10:23",
+            "status": 1,
+            "fileName": "屏幕快照 2019-05-31 上午11.21.36.png",
+            "uploadTime": "2019-06-05 17:59:56",
+            "folderPath": "E:\\cms_file\\business\\plane\\1559728796735\\",
+            "channelName": null,
+            "channelId": null
+        },
+        {
+            "id": 27,
+            "marketName": "浦商生鲜朝阳店",
+            "marketCode": "1014",
+            "linkman": "向文帅",
+            "linkTelephone": "13917399769",
+            "marketAddress": "朝农新村",
+            "axisX": "121.844837",
+            "axisY": "31.102429",
+            "comment": "面积：1000",
+            "planeId": 29,
+            "createDate": "2020-03-04 20:09:24",
+            "status": 1,
+            "fileName": "屏幕快照 2019-05-31 下午1.45.56.png",
+            "uploadTime": "2019-06-05 17:54:49",
+            "folderPath": "E:\\cms_file\\business\\plane\\1559728489906\\",
+            "channelName": null,
+            "channelId": null
+        }
+    ]
+
+    $(function () {
+        mapInit()
+        initData()
+        initSelectEvent()
+    })
+
+    function initSelectEvent() {
+        $('#mdlx_select').change(function () {
+            // $('#mdlx_select').find("option:selected").val()
+            // $('#mdlx_select').find("option:selected").text()
+        })
+    }
+    function initTabClickEvent() {
+        $('#footer .item').click(function (e) {
+            let inx = $(this).index() + 1
+            if (inx === 1) window.location.href = "../index.html"
+            else if (inx === 2) window.location.reload()
+            else if (inx === 3) { }
+            else { }
+        })
+    }
+
+    function mapInit() {
+        let map = new BMap.Map("map");
+        map.centerAndZoom(new BMap.Point(121.635022, 31.131411), 11);
+        map.enableScrollWheelZoom();
+        // 添加定位控件
+        let geolocationControl = new BMap.GeolocationControl();
+        geolocationControl.addEventListener("locationSuccess", function (e) {
+            var address = '';
+            address += e.addressComponent.province;
+            address += e.addressComponent.city;
+            address += e.addressComponent.district;
+            address += e.addressComponent.street;
+            address += e.addressComponent.streetNumber;
+            console.log(address)
+            alert(address)
+        });
+        geolocationControl.addEventListener("locationError", function (e) { })
+        map.addControl(geolocationControl);
+        // 
+        addMarker(map)
+    }
+    function addMarker(_map) {
+        _map.clearOverlays()
+        shopList.forEach(item => {
+            let marker = new BMap.Marker(new BMap.Point(item.axisX, item.axisY), { title: item.marketName })
+            marker.addEventListener("click", function () { });
+            _map.addOverlay(marker)
+        })
+        return false;
+        let marker11 = new BMap.Marker(new BMap.Point(121.635022, 31.131411), {
+            title: "",
+            icon: new BMap.Icon({
+                url: "",
+                size: new BMap.Size(20, 20)
+            })
+        })
+    }
+
+    function initData() {
+        let html = template('shop_list_tpl', { shopList: shopList })
+        let container = document.querySelector('#shop_list');
+        container.innerHTML = html;
+        $('#shop_list .item .title .name').click(function () {
+            goShopGoodsList()
+        })
+        $('#shop_list .item .site').click(function () {
+            goShopGoodsList()
+        })
+        $('#shop_list .item .jl').click(function () {
+            goShopGoodsList()
+        })
+        $('#shop_list .item .title .xq').click(function () {
+            goShopDetail()
+        })
+    }
+    function goShopGoodsList() {
+        window.location.href = "./index.html"
+    }
+    function goShopDetail() {
+        window.location.href = "./point.html"
+    }
+</script>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>追溯云</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<meta http-equiv="Cache-Control" content="max-age=60">
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script type="text/javascript">
+			//rem布局适配
+			if ('addEventListener' in document) {
+				//使用rem
+				var html = document.documentElement;
+				var windowWidth = html.clientWidth;
+				html.style.fontSize = windowWidth / 7.2 + 'px';
+			}
+			window.addEventListener('resize', function() {
+				var html = document.documentElement;
+				var windowWidth = html.clientWidth;
+				html.style.fontSize = windowWidth / 7.2 + 'px';
+			}, false);
+		</script>
+	</head>
+
+	<body>
+		<div id="root">
+			<div class="top">
+				<p class="text1">浦东新区 智慧农产品综合信息管理平台</p>
+				<p class="text2">追溯信息</p>
+			</div>
+			<!---->
+			<!---->
+			<!--菜场信息-->
+			<div class="module">
+				<div class="line title">菜场信息</div>
+				<div class="line clearfix">
+					<span class="text1">菜场名称:</span>
+					<span class="text2" flag='marketName'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">菜场编号:</span>
+					<span class="text2" flag='marketCode'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">地址:</span>
+					<span class="text2" flag='marketAddress'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">负责人:</span>
+					<span class="text2" flag='linkman'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">联系电话:</span>
+					<span class="text2" flag='linkTelephone'></span>
+				</div>
+			</div>
+			<div class="module">
+				<div class="line title">商户信息</div>
+				<div class="line clearfix">
+					<span class="text1">商户名称:</span>
+					<span class="text2" flag='businessName'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">摊位号:</span>
+					<span class="text2" flag='businessCode'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">联系人:</span>
+					<span class="text2" flag='businessLinkman'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">电话:</span>
+					<span class="text2" flag='businessLinkTelephone'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">地址:</span>
+					<span class="text2" flag='businessAddress'></span>
+				</div>
+			</div>
+			<!---->
+			<!--商品列表-->
+			<div class="module splist">
+				<div class="line title">商品列表</div>
+				<div id="splist_con"></div>
+			</div>
+		</div>
+		</div>
+	</body>
+
+</html>
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/config.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var marketCommodityList = [],
+		market = {},
+		business = {};
+	$(function() {
+		init()
+	})
+	//获取地址栏参数方法
+	function getQueryVariable(variable) {
+		var query = window.location.search.substring(1);
+		var vars = query.split("&");
+		for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split("=");
+			if (pair[0] == variable) {
+				return pair[1];
+			}
+		}
+		return (false);
+	}
+	//初始化
+	function init() {
+		if (window.location.href.indexOf('?') == -1) window.location.href = location.href + "?businessId=10080";
+		let businessId = getQueryVariable("businessId");
+		$.get(api + '/businessH5/getCommodityBusinessCode', {
+			"businessId": businessId
+		}, function(res) {
+			market = res.data ? res.data.market : null;
+			business = res.data ? res.data.business : null;
+			marketCommodityList = res.data ? res.data.marketCommodityList : null;
+			if (market) {
+				$("span[flag='marketName']").text(market.marketName ? market.marketName : '')
+				$("span[flag='marketCode']").text(market.marketCode ? market.marketCode : '')
+				$("span[flag='marketAddress']").text(market.marketAddress ? market.marketAddress : '')
+				$("span[flag='linkman']").text(market.linkman ? market.linkman : '')
+				$("span[flag='linkTelephone']").text(market.linkTelephone ? market.linkTelephone : '')
+			}
+			if (business) {
+				$("span[flag='businessName']").text(business.businessName ? business.businessName : '')
+				$("span[flag='businessCode']").text(business.businessCode ? business.businessCode : '')
+				$("span[flag='businessLinkman']").text(business.businessLinkman ? business.businessLinkman : '')
+				$("span[flag='businessLinkTelephone']").text(business.businessLinkTelephone ? business.businessLinkTelephone :
+					'')
+				$("span[flag='businessAddress']").text(business.businessAddress ? business.businessAddress : '')
+			}
+			if (marketCommodityList) {
+				let html = '';
+				marketCommodityList.forEach(item => {
+					html += "<div class='line clearfix'>"
+					html += "<span class='text3'>" + item.commodityName + "</span>"
+					html += "<span class='text4'>" + item.commodityCode + "</span>"
+					html += "<span class='icon'></span>"
+					html += "</div>"
+				})
+				$("#splist_con").append(html)
+			}
+			goDetail()
+		})
+	}
+
+	//点击跳转详情页
+	function goDetail() {
+		$('#splist_con .line').click(function() {
+			let i = $(this).index();
+			let params = {
+				marketName: market.marketName,
+				commodityId: marketCommodityList[i].id,
+				businessId: business.id
+			}
+			let info = JSON.stringify(params)
+			window.sessionStorage.setItem('trace_info', info)
+			window.location.href = 'detail.html'
+		})
+	}
+</script>

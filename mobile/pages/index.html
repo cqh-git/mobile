@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1, minimum-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_764987_7o7azf8hu5r.css" />
+		<link rel="stylesheet" href="../css/index.css">
+		<link rel="stylesheet" href="../css/common.css">
+		<script src="../js/jquery-3.1.1.min.js"></script>
+		<script src="../js/art-template-4.13.2.min.js"></script>
+		<script type="text/javascript" src="../js/rem.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script src="../js/e-smart-zoom-jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<header class="header">
+			<span>浦商平价菜</span>
+		</header>
+		<div class="banner">
+			<div class="img_box">
+				<img src="../image/banner.png" alt="">
+			</div>
+			<div class="ads_box">
+				<i class="iconfont icon-location"></i>
+				<div class="name_box">
+					<div class="name"><a href="./point.html">浦商邻里荟福山店</a></div>
+					<div class="ads">距您1.2km</div>
+				</div>
+				<span class="more"><a href="./map.html">更多门店</a></span>
+			</div>
+		</div>
+		<nav class="content clearfix">
+			<div class="tabs_bar" id="tabsBar"></div>
+			<div class="tabs_con" id=tabContent></div>
+		</nav>
+		<div id="mask">
+			<div class="con">
+				<div>
+					<img src="" id='big-img' />
+				</div>
+				<div class="box">
+					<p id="names"></p>
+					<p id="prices"></p>
+				</div>
+			</div>
+		</div>
+		<!-- 底部 -->
+		<footer class="footer" id="footer">
+			<div class="item active" data-index='1'>
+				<i class="iconfont icon-shop"></i>
+				<span>门店信息</span>
+			</div>
+			<div class="item" data-index='2'>
+				<i class="iconfont icon-ditu"></i>
+				<span>门店地图</span>
+			</div>
+			<div class="item" data-index='3'>
+				<i class="iconfont icon-user"></i>
+				<span>我的</span>
+			</div>
+		</footer>
+
+		<!-- tabs template -->
+		<script type="text/html" id="tabTpl">
+			{{each tabs.tabs}}
+		{{if tabs.tabIndex === $index}}
+		<div class="item active">{{$value}}</div>
+		{{else}}
+		<div class="item">{{$value}}</div>
+		{{/if}}
+		{{/each}}
+	</script>
+		<!--  -->
+
+		<!-- tabs content template -->
+		<script type="text/html" id="tabConTpl">
+			{{each data}}
+		<div class="item clearfix">
+			<div class="img_box">
+				<img src={{$value.img}} alt="" class="picA">
+			</div>
+			<div class="name_box">
+				<div class="title">{{$value.title}}</div>
+				<div class="sub_title">新鲜直采，产地直供</div>
+				<div class="num">
+					¥{{$value.num}} <i>/袋</i>
+				</div>
+			</div>
+			<!-- <span class="go_btn iconfont icon-right"></span> -->
+		</div>
+		{{/each}}
+	</script>
+		<!--  -->
+		<script type="text/javascript">
+			// tab 切换
+			(function() {
+				const tabs = ['蔬菜类', '水果类', '肉类', '禽蛋类', '副食品类', '其他类'];
+				let tabIndex = 0;
+				let tabsParams = {
+					tabs: tabs,
+					tabIndex: tabIndex
+				};
+				// 渲染模板
+				var html = template('tabTpl', {
+					tabs: tabsParams
+				})
+				var tabsContainer = document.querySelector('#tabsBar');
+				tabsContainer.innerHTML = html;
+
+				// 点击切换
+				$('#tabsBar .item').on('click', function() {
+					$('#tabsBar .item').removeClass('active');
+					$(this).addClass('active');
+
+				});
+			})();
+
+			// tab右侧内容
+			(function() {
+				const data = [{
+						title: '上海青',
+						img: '../image/shq.jpg',
+						num: '3.5'
+					},
+					{
+						title: '黄心土豆',
+						img: '../image/hxtd.jpg',
+						num: '3.2'
+					},
+					{
+						title: '三九菇',
+						img: '../image/sjg.jpg',
+						num: '4.5'
+					},
+					{
+						title: '生菜',
+						img: '../image/sc.jpg',
+						num: '3.1'
+					},
+					{
+						title: '长白萝卜',
+						img: '../image/cblb.jpg',
+						num: '2.5'
+					},
+					{
+						title: '直筒大白菜',
+						img: '../image/ztdbc.jpg',
+						num: '3.5'
+					},
+				];
+				// 渲染模板
+				var html = template('tabConTpl', {
+					data: data
+				})
+				var tabsContainer = document.querySelector('#tabContent');
+				tabsContainer.innerHTML = html;
+				var titles = document.getElementsByClassName('title');
+				var nums = document.getElementsByClassName('num');
+				$('#tabContent .item').on('click', function(e) {
+					let index = $(this).index()
+					$('#names').html(titles[index].innerHTML);
+					$('#prices').html(nums[index].innerHTML);
+					let url = $('.picA')[index].getAttribute('src');
+					$('#mask').show()
+					// $('#mask #big-img').attr('src', $(this).attr('src'))
+					$('#mask #big-img').attr('src', url)
+					$("#mask img").smartZoom()
+					//禁止滑动
+					$('#mask').bind("touchmove", function(e) {
+						e.preventDefault();
+					})
+					//点击 遮罩层 关闭
+					$('#mask').click(function() {
+						$(this).hide()
+					})
+					// showImg(url)
+					// window.location.href = './commodity.html'
+				})
+			})()
+
+			// function showImg(url) {
+			// 	//显示 遮罩层
+			// 	$('#mask').show()
+			// 	// $('#mask #big-img').attr('src', $(this).attr('src'))
+			// 	$('#mask #big-img').attr('src', url)
+			// 	$("#mask img").smartZoom()
+			// 	//禁止滑动
+			// 	$('#mask').bind("touchmove", function(e) {
+			// 		e.preventDefault();
+			// 	})
+			// 	//点击 遮罩层 关闭
+			// 	$('#mask').click(function() {
+			// 		$(this).hide()
+			// 	})
+			// }
+		</script>
+	</body>
+
+</html>

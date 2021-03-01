@@ -1,0 +1,29 @@
+/* 底部tab */
+.footer {
+    height: 9.6rem;
+    border-top: 1px solid #BDBDBD;
+    background-color: #FFFFFF;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+.footer .item {
+    width: calc(100% / 3);
+    height: 100%;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    color: #A0AFA9;
+    font-size: 2.2rem;
+    padding: 1rem 0;
+}
+.footer .item.active {
+    color: #1E9051;
+}
+.footer .item i {
+    font-size: 4rem;
+}

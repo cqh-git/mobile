@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>追溯云</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<meta http-equiv="Cache-Control" content="max-age=60">
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script type="text/javascript">
+			//rem布局适配
+			if ('addEventListener' in document) {
+				//使用rem
+				var html = document.documentElement;
+				var windowWidth = html.clientWidth;
+				html.style.fontSize = windowWidth / 7.2 + 'px';
+			}
+			window.addEventListener('resize', function() {
+				var html = document.documentElement;
+				var windowWidth = html.clientWidth;
+				html.style.fontSize = windowWidth / 7.2 + 'px';
+			}, false);
+		</script>
+	</head>
+
+	<body>
+		<div id="root">
+			<div class="top">
+				<p class="text1">浦东新区平价菜柜农产品</p>
+				<p class="text2">追溯信息</p>
+			</div>
+			<!---->
+			<!---->
+			<!--产品基本信息-->
+			<div class="module">
+				<div class="line title">产品基本信息</div>
+				<div class="line clearfix">
+					<span class="text1">商品名称:</span>
+					<span class="text2 text2_1" flag='commodityName'></span>
+					<span class="text4" flag='commodityCode'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">商品分类:</span>
+					<span class="text2" flag='categoryName'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">产地:</span>
+					<span class="text2" flag='placeOrigin'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">上游基地:</span>
+					<span class="text2" flag='lastAddress'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">供应商:</span>
+					<span class="text2" flag='supplierName'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">进货时间:</span>
+					<span class="text2" flag='stockDate'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">销售市场:</span>
+					<span class="text2" flag='marketName'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">销售商户:</span>
+					<span class="text2" flag='name'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">销售地址:</span>
+					<span class="text2" flag='address'></span>
+				</div>
+			</div>
+			<!--供应商-->
+			<!-- <div class="module">
+				<div class="line title">进货信息</div>
+				<div class="line clearfix">
+					<span class="text1">进货量:</span>
+					<span class="text2" flag='supplierName'></span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">单价:</span> -->
+			<!-- <img src="" class="yyzz" id="yyzz" /> -->
+			<!-- 	</div>
+			</div> -->
+			<!--终端信息-->
+			<!-- <div class="module">
+				<div class="line title">终端信息</div>
+				<div class="line clearfix">
+					<span class="text1">菜场名称:</span>
+					<span class="text2">浦商邻里荟福山店</span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">联系人:</span>
+					<span class="text2">张凯强</span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">联系方式:</span>
+					<span class="text2">17521126797</span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">地址:</span>
+					<span class="text2">福山路49号</span>
+				</div>
+			</div> -->
+			<!--商户信息-->
+			<!-- <div class="module">
+				<div class="line title">商户信息</div>
+				<div class="line clearfix">
+					<span class="text1">商户名称:</span>
+					<span class="text2" flag='cabinetName'>清美</span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">摊位号:</span>
+					<span class="text2" flag='cabinetAddress'>001</span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">联系人:</span>
+					<span class="text2" flag='cabinetAddress'>张凯强</span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">电话:</span>
+					<span class="text2" flag='cabinetAddress'>17521126797</span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">地址:</span>
+					<span class="text2" flag='cabinetAddress'>福山路49号</span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">追溯码:</span>
+					<span class="text2" flag='cabinetAddress'>139654885587</span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">批次号:</span>
+					<span class="text2" flag='pc'>16987258</span>
+				</div>
+				<div class="line clearfix">
+					<span class="text1">操作人:</span>
+					<span class="text2" flag='cz'>张凯强</span>
+				</div>
+			</div> -->
+			<!--流通追溯信息-->
+			<!-- <div class="module">
+				<div class="line title">流通追溯信息</div>
+				<div class="item">
+					<p class="desc">产地</p>
+					<p class="time placeOrigin"></p>
+				</div>
+				<div class="item">
+					<p class="desc">上游基地</p>
+					<p class="time lastAddress"></p>
+				</div>
+				<div class="item">
+					<p class="desc marketName"></p>
+					<p class="time stockDate"></p>
+				</div>
+			</div> -->
+
+		</div>
+		<!--遮罩层-->
+		<div id="mask">
+			<div class="con">
+				<img src="" id='big-img' />
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/e-smart-zoom-jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/config.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var trace_info = window.sessionStorage.getItem('trace_info')
+	if (!trace_info) {
+		window.history.back()
+	} else {
+		trace_info = JSON.parse(trace_info)
+	}
+	$(function() {
+		init()
+	})
+
+	function init() {
+		$("span[flag='commodityName']").text(trace_info.commodityName ? trace_info.commodityName : '')
+		$("span[flag='categoryName']").text(trace_info.categoryName ? trace_info.categoryName : '')
+		$("span[flag='placeOrigin']").text(trace_info.placeOrigin ? trace_info.placeOrigin : '')
+		$("span[flag='lastAddress']").text(trace_info.lastAddress ? trace_info.lastAddress : '')
+		$("span[flag='supplierName']").text(trace_info.supplierName ? trace_info.supplierName : '')
+		$("span[flag='stockDate']").text(trace_info.createTime ? trace_info.createTime : '')
+		// $("span[flag='marketName']").text(trace_info.marketName ? trace_info.marketName : '')
+		$("span[flag='marketName']").text('平价摊位')
+		$("span[flag='name']").text(trace_info.cabinetName ? trace_info.cabinetName : '')
+		$("span[flag='address']").text(trace_info.marketAddress ? trace_info.marketAddress : '')
+	}
+</script>
